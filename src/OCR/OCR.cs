@@ -1,11 +1,11 @@
 namespace OCR
 {
-    public class Hello
+    public class OCR
     {
-        public Hello() {}
+        public OCR() {}
 
-        public string SayHi() {
-            return "Hello World";
+        public int read(string input) {
+            return 0;
         }
     }
 }

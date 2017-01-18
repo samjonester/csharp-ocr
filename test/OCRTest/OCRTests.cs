@@ -8,17 +8,24 @@ namespace OCR.Tests
     public class Tests
     {
 
-        private Hello subject;
+        private OCR subject;
 
         [SetUp]
         public void Setup() {
-            subject = new Hello();
+            subject = new OCR();
         }
 
         [Test]
-        public void itShouldSayHi()
+        public void itShouldReadInput()
         {
-            Assert.AreEqual("Blah", subject.SayHi());
+            string input = "  _  _     _  _  _  _  _ \n" +
+                           "| _| _||_||_ |_   ||_||_|\n" +
+                           "||_  _|  | _||_|  ||_| _|\n" +
+                           "                         ";
+
+            double output = subject.read(input);
+
+            Assert.AreEqual(123456789, output);
         }
     }
 }
