@@ -1,11 +1,24 @@
 namespace OCR
 {
+    using System.Collections.Generic;
+    using Convert;
+    using Split;
     public class OCR
     {
-        public OCR() {}
+        private ISplit Splitter;
+        private IConvert Converter;
 
-        public int read(string input) {
-            return 0;
+        public OCR() : this(new NumberSplitter(), new NumberConverter()) {}
+
+        public OCR(ISplit splitter, IConvert converter) {
+            this.Splitter = splitter;
+            this.Converter = converter;
+        }
+
+        public double Read(string input) {
+            List<string> splitInput = Splitter.Split(input);
+            double numbers = Converter.Convert(splitInput);
+            return numbers;
         }
     }
 }

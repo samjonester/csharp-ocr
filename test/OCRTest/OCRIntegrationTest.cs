@@ -1,27 +1,31 @@
 using System;
 
-namespace OCR.Tests
+namespace OCR.Test
 {
     using Xunit;
+    using Moq;
+    using System.Collections.Generic;
+    using Convert;
+    using Split;
 
-    public class Tests
+    public class OCRIntegrationTest
     {
 
-        private OCR subject;
-
-        public Tests() {
-            subject = new OCR();
+        private OCR Subject;
+        public OCRIntegrationTest() {
+            Subject = new OCR();
         }
 
         [Fact]
-        public void itShouldReadInput()
+        public void integrationTest()
         {
+            Subject = new OCR();
             string input = "  _  _     _  _  _  _  _ \n" +
                            "| _| _||_||_ |_   ||_||_|\n" +
                            "||_  _|  | _||_|  ||_| _|\n" +
                            "                         ";
 
-            double output = subject.read(input);
+            double output = Subject.Read(input);
 
             Assert.Equal(123456789, output);
         }
