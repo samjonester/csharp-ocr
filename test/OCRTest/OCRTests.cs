@@ -2,20 +2,18 @@ using System;
 
 namespace OCR.Tests
 {
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class Tests
     {
 
         private OCR subject;
 
-        [SetUp]
-        public void Setup() {
+        public Tests() {
             subject = new OCR();
         }
 
-        [Test]
+        [Fact]
         public void itShouldReadInput()
         {
             string input = "  _  _     _  _  _  _  _ \n" +
@@ -25,7 +23,7 @@ namespace OCR.Tests
 
             double output = subject.read(input);
 
-            Assert.AreEqual(123456789, output);
+            Assert.Equal(123456789, output);
         }
     }
 }
