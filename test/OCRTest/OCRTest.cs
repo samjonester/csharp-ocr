@@ -27,7 +27,7 @@ namespace OCR.Test
                            "| _| _||_||_ |_   ||_||_|\n" +
                            "||_  _|  | _||_|  ||_| _|\n" +
                            "                         ";
-            List<string> splitOutput = new List<string> {"foo", "bar"};
+            List<List<string>> splitOutput = new List<List<string>> {new List<string> {"foo", "bar"}};
             double convertedOutput = 123123123;
 
             Splitter.Setup(numberSplitter => numberSplitter.Split(input)).Returns(splitOutput);

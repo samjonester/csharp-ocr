@@ -16,7 +16,7 @@ namespace OCR
         }
 
         public double Read(string input) {
-            List<string> splitInput = Splitter.Split(input);
+            IEnumerable<IEnumerable<string>> splitInput = Splitter.Split(input);
             double numbers = Converter.Convert(splitInput);
             return numbers;
         }

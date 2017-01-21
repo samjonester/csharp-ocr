@@ -1,11 +1,21 @@
-namespace OCR.Split {
+namespace OCR.Split
+{
 
     using System.Collections.Generic;
+    using System;
+    using System.Linq;
+    using Extensions;
 
-    public class NumberSplitter : ISplit {
+    public class NumberSplitter : ISplit
+    {
 
-        public List<string> Split(string input) {
-            throw new System.NotImplementedException("Implement Me!");
+        public IEnumerable<IEnumerable<string>> Split(string input)
+        {
+            return input
+            .Lines()
+            .Take(3)
+            .Select(lines => lines.Partition(3))
+            .Transpose();
         }
     }
 }

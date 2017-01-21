@@ -3,7 +3,7 @@ namespace OCR.Convert {
     using NotImplementedException = System.NotImplementedException;
     public class NumberConverter : IConvert {
 
-        public double Convert(List<string> numbers) {
+        public double Convert(IEnumerable<IEnumerable<string>> numbers) {
             throw new NotImplementedException("Implement Me!");
         }
     }
