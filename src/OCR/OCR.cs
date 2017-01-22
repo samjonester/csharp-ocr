@@ -1,25 +1,34 @@
 namespace OCR
 {
+    using System.Linq;
+    using System.Collections.Generic;
+    using static Extensions.ObjectExtensions;
     using Convert;
     using Split;
-    using System.Collections.Generic;
-    using System.Linq;
+    using CheckSum;
 
     public class OCR
     {
         private ISplit Splitter;
         private IConvert Converter;
 
-        public OCR() : this(new NumberSplitter(), new NumberConverter()) {}
+        private ICheckSum CheckSummer;
 
-        public OCR(ISplit splitter, IConvert converter) {
+        public OCR() : this(new NumberSplitter(), new NumberConverter(), new CheckSummer()) {}
+
+        public OCR(ISplit splitter, IConvert converter, ICheckSum checksummer) {
             this.Splitter = splitter;
             this.Converter = converter;
+            this.CheckSummer = checksummer;
         }
 
-        public IEnumerable<int> Read(string input) {
+        public Account Read(string input) {
             return Splitter.Split(input)
-            .Select(splitInput => Converter.Convert(splitInput));
+            .Select(Converter.Convert)
+            .With(accountNumber => new Account {
+                    Number = string.Join("", accountNumber),
+                    Checksum = CheckSummer.CheckSum(accountNumber)
+            });
         }
     }
 }

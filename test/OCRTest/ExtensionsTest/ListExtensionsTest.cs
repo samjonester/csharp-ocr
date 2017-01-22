@@ -2,8 +2,8 @@ namespace OCRTest.ExtensionsTest
 {
     using Xunit;
     using System.Collections.Generic;
-    using OCR.Extensions;
     using System.Linq;
+    using OCR.Extensions;
 
     public class ListExtensionsTest
     {

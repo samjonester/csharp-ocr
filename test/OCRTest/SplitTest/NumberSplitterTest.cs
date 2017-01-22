@@ -6,7 +6,7 @@ namespace OCRTest.SplitTest {
 
     public class NumberSplitterTest {
 
-        ISplit Subject;
+        private ISplit Subject;
 
         public NumberSplitterTest() {
             Subject = new NumberSplitter();

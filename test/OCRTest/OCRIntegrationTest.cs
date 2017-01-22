@@ -17,17 +17,33 @@ namespace OCR.Test
         }
 
         [Fact]
-        public void integrationTest()
+        public void validAccount()
         {
             Subject = new OCR();
-            string input = "    _  _     _  _  _  _  _  _ \n" +
-                           "  | _| _||_||_ |_   ||_||_|| |\n" +
-                           "  ||_  _|  | _||_|  ||_| _||_|\n" +
-                           "                              ";
+            string input = " _     _  _  _  _  _  _  _ \n" +
+                           " _||_||_ |_||_| _||_||_ |_ \n" +
+                           " _|  | _||_||_||_ |_||_| _|\n" +
+                           "                           ";
 
-            IEnumerable<int> output = Subject.Read(input);
+            Account output = Subject.Read(input);
 
-            Assert.Equal(new List<int>{1,2,3,4,5,6,7,8,9,0}, output);
+            Assert.Equal(output.Number, "345882865");
+            Assert.True(output.Valid);
+        }
+ 
+        [Fact]
+        public void invalidAccount()
+        {
+            Subject = new OCR();
+            string input = " _     _  _  _  _  _  _  _ \n" +
+                           "|_||_||_ |_||_| _||_||_ |_ \n" +
+                           "|_|  | _||_||_||_ |_||_| _|\n" +
+                           "                           ";
+
+            Account output = Subject.Read(input);
+
+            Assert.Equal(output.Number, "845882865");
+            Assert.False(output.Valid);
         }
     }
 }
