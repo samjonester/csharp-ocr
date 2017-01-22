@@ -1,8 +1,10 @@
 namespace OCR
 {
-    using System.Collections.Generic;
     using Convert;
     using Split;
+    using System.Collections.Generic;
+    using System.Linq;
+
     public class OCR
     {
         private ISplit Splitter;
@@ -15,10 +17,9 @@ namespace OCR
             this.Converter = converter;
         }
 
-        public double Read(string input) {
-            IEnumerable<IEnumerable<string>> splitInput = Splitter.Split(input);
-            double numbers = Converter.Convert(splitInput);
-            return numbers;
+        public IEnumerable<int> Read(string input) {
+            return Splitter.Split(input)
+            .Select(splitInput => Converter.Convert(splitInput));
         }
     }
 }

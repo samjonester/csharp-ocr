@@ -1,10 +1,52 @@
 namespace OCR.Convert {
     using System.Collections.Generic;
-    using NotImplementedException = System.NotImplementedException;
+    using System.Linq;
     public class NumberConverter : IConvert {
 
-        public double Convert(IEnumerable<IEnumerable<string>> numbers) {
-            throw new NotImplementedException("Implement Me!");
+        public int Convert(IEnumerable<string> number) {
+            return mappings.Where((kvp) => kvp.Key.SequenceEqual(number)).First().Value;
         }
+
+        public static Dictionary<IEnumerable<string>, int> mappings = new Dictionary<IEnumerable<string>, int>() {
+            {new List<string> {"   ",
+                               "  |",
+                               "  |"}, 1},
+
+            {new List<string> {" _ ",
+                               " _|",
+                               "|_ "}, 2},
+
+            {new List<string> {" _ ",
+                               " _|",
+                               " _|"}, 3},
+
+            {new List<string> {"   ",
+                               "|_|",
+                               "  |"}, 4},
+
+            {new List<string> {" _ ",
+                               "|_ ",
+                               " _|"}, 5},
+
+            {new List<string> {" _ ",
+                               "|_ ",
+                               "|_|"}, 6},
+
+            {new List<string> {" _ ",
+                               "  |",
+                               "  |"}, 7},
+
+            {new List<string> {" _ ",
+                               "|_|",
+                               "|_|"}, 8},
+
+            {new List<string> {" _ ",
+                               "|_|",
+                               " _|"}, 9},
+
+            {new List<string> {" _ ",
+                               "| |",
+                               "|_|"}, 0},
+        };
     }
 }

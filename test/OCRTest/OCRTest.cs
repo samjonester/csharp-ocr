@@ -23,19 +23,19 @@ namespace OCR.Test
 
         [Fact]
         public void itShouldReadAndConvertNumber() {
-            string input = "  _  _     _  _  _  _  _ \n" +
-                           "| _| _||_||_ |_   ||_||_|\n" +
-                           "||_  _|  | _||_|  ||_| _|\n" +
-                           "                         ";
-            List<List<string>> splitOutput = new List<List<string>> {new List<string> {"foo", "bar"}};
-            double convertedOutput = 123123123;
+            string input = "hello world";
+
+            List<string> numberStrings = new List<string> {"so long", "and thanks", "for all the fish"};
+            List<List<string>> splitOutput = new List<List<string>> {numberStrings};
+            int convertedNumber = 42;
+
 
             Splitter.Setup(numberSplitter => numberSplitter.Split(input)).Returns(splitOutput);
-            Converter.Setup(numberConverter => numberConverter.Convert(splitOutput)).Returns(convertedOutput);
+            Converter.Setup(numberConverter => numberConverter.Convert(numberStrings)).Returns(convertedNumber);
 
-            double output = Subject.Read(input);
+            IEnumerable<int> output = Subject.Read(input);
 
-            Assert.Equal(convertedOutput, output);
+            Assert.Equal(new List<int>{convertedNumber}, output);
         }
     }
 }

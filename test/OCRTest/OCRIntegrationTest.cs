@@ -20,14 +20,14 @@ namespace OCR.Test
         public void integrationTest()
         {
             Subject = new OCR();
-            string input = "  _  _     _  _  _  _  _ \n" +
-                           "| _| _||_||_ |_   ||_||_|\n" +
-                           "||_  _|  | _||_|  ||_| _|\n" +
-                           "                         ";
+            string input = "    _  _     _  _  _  _  _  _ \n" +
+                           "  | _| _||_||_ |_   ||_||_|| |\n" +
+                           "  ||_  _|  | _||_|  ||_| _||_|\n" +
+                           "                              ";
 
-            double output = Subject.Read(input);
+            IEnumerable<int> output = Subject.Read(input);
 
-            Assert.Equal(123456789, output);
+            Assert.Equal(new List<int>{1,2,3,4,5,6,7,8,9,0}, output);
         }
     }
 }
