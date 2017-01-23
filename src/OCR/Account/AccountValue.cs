@@ -1,8 +1,10 @@
 namespace OCR
 {
-    public class Account
+    using System.Collections.Generic;
+    public class AccountValue
     {
-        public string Number {get; set;}
+        public IEnumerable<int> Number {get; set;}
+        public string PrintedValue {get; set;}
 
         public int Checksum {get; set;}
 

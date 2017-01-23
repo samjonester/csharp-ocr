@@ -3,10 +3,6 @@ using System;
 namespace OCR.Test
 {
     using Xunit;
-    using Moq;
-    using System.Collections.Generic;
-    using Convert;
-    using Split;
 
     public class OCRIntegrationTest
     {
@@ -25,10 +21,9 @@ namespace OCR.Test
                            " _|  | _||_||_||_ |_||_| _|\n" +
                            "                           ";
 
-            Account output = Subject.Read(input);
+            AccountValue output = Subject.Read(input);
 
-            Assert.Equal(output.Number, "345882865");
-            Assert.True(output.Valid);
+            Assert.Equal("345882865", output.PrintedValue);
         }
  
         [Fact]
@@ -40,10 +35,9 @@ namespace OCR.Test
                            "|_|  | _||_||_||_ |_||_| _|\n" +
                            "                           ";
 
-            Account output = Subject.Read(input);
+            AccountValue output = Subject.Read(input);
 
-            Assert.Equal(output.Number, "845882865");
-            Assert.False(output.Valid);
+            Assert.Equal("845882865 ERR", output.PrintedValue);
         }
     }
 }
