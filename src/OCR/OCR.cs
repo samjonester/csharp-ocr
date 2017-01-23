@@ -25,17 +25,14 @@ namespace OCR
             this.Printer = printer;
         }
 
-        public AccountValue Read(string input) {
+        public string Read(string input) {
             return Splitter.Split(input)
             .Select(Converter.Convert)
             .With(accountNumber => new AccountValue {
                 Number = accountNumber,
                 Checksum = CheckSummer.CheckSum(accountNumber)
             })
-            .With(account => {
-                account.PrintedValue = Printer.Print(account);
-                return account;
-            });
+            .With(Printer.Print);
         }
     }
 }

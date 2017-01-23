@@ -2,9 +2,10 @@ namespace OCR.Convert {
     using System.Collections.Generic;
     using System.Linq;
     public class NumberConverter : IConvert {
+        public static int INVALID = -1;
 
         public int Convert(IEnumerable<string> number) {
-            return mappings.Where((kvp) => kvp.Key.SequenceEqual(number)).First().Value;
+            return mappings.Where((kvp) => kvp.Key.SequenceEqual(number)).Select(kvp => kvp.Value).DefaultIfEmpty(INVALID).FirstOrDefault();
         }
 
         public static Dictionary<IEnumerable<string>, int> mappings = new Dictionary<IEnumerable<string>, int>() {
