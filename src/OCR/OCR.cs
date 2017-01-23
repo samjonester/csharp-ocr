@@ -28,10 +28,6 @@ namespace OCR
         public string Read(string input) {
             return Splitter.Split(input)
             .Select(Converter.Convert)
-            .With(accountNumber => new AccountValue {
-                Number = accountNumber,
-                Checksum = CheckSummer.CheckSum(accountNumber)
-            })
             .With(Printer.Print);
         }
     }

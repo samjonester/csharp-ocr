@@ -25,5 +25,16 @@ namespace OCRTest.ExtensionsTest
                 .All(x => x)
             );
        }
+
+       [Fact]
+       public void itShouldJoinWithStrings() {
+           List<string> sInput = new List<string> {"hello", "world"};
+
+           Assert.Equal("hello world", sInput.StrJoin(" "));
+
+           List<int> nInput = new List<int> {1, 2};
+
+           Assert.Equal("1 2", nInput.StrJoin(" "));
+       }
     }
 }

@@ -1,11 +1,15 @@
 namespace OCR.Convert {
     using System.Collections.Generic;
     using System.Linq;
+    using FP;
     public class NumberConverter : IConvert {
         public static int INVALID = -1;
 
-        public int Convert(IEnumerable<string> number) {
-            return mappings.Where((kvp) => kvp.Key.SequenceEqual(number)).Select(kvp => kvp.Value).DefaultIfEmpty(INVALID).FirstOrDefault();
+        public Maybe<int> Convert(IEnumerable<string> number) {
+            return mappings
+            .Where((kvp) => kvp.Key.SequenceEqual(number))
+            .Select(kvp => Maybe<int>.Just(kvp.Value))
+            .DefaultIfEmpty(Maybe<int>.Nothing()).FirstOrDefault();
         }
 
         public static Dictionary<IEnumerable<string>, int> mappings = new Dictionary<IEnumerable<string>, int>() {

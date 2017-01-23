@@ -2,6 +2,7 @@ namespace OCRTest.ConverterTest {
     using Xunit;
     using System.Collections.Generic;
     using OCR.Convert;
+    using OCR.FP;
     public class NumberConverterTest {
         IConvert Subject;
         public NumberConverterTest() {
@@ -14,7 +15,7 @@ namespace OCRTest.ConverterTest {
                                                   "  |",
                                                   "  |"};
 
-            Assert.Equal(1, Subject.Convert(zero));
+            Assert.Equal(1, Subject.Convert(zero).FromJust());
         }
         [Fact]
         public void itShouldConvert2() {
@@ -22,7 +23,7 @@ namespace OCRTest.ConverterTest {
                                                   " _|",
                                                   "|_ " };
 
-            Assert.Equal(2, Subject.Convert(two));
+            Assert.Equal(2, Subject.Convert(two).FromJust());
         }
         [Fact]
         public void itShouldConvert3() {
@@ -30,7 +31,7 @@ namespace OCRTest.ConverterTest {
                                                     " _|",
                                                     " _|" };
 
-            Assert.Equal(3, Subject.Convert(three));
+            Assert.Equal(3, Subject.Convert(three).FromJust());
         }
         [Fact]
         public void itShouldConvert4() {
@@ -38,7 +39,7 @@ namespace OCRTest.ConverterTest {
                                                    "|_|",
                                                    "  |" };
 
-            Assert.Equal(4, Subject.Convert(four));
+            Assert.Equal(4, Subject.Convert(four).FromJust());
         }
         [Fact]
         public void itShouldConvert5() {
@@ -46,7 +47,7 @@ namespace OCRTest.ConverterTest {
                                                    "|_ ",
                                                    " _|" };
 
-            Assert.Equal(5, Subject.Convert(five));
+            Assert.Equal(5, Subject.Convert(five).FromJust());
         }
         [Fact]
         public void itShouldConvert6() {
@@ -54,7 +55,7 @@ namespace OCRTest.ConverterTest {
                                                   "|_ ",
                                                   "|_|" };
 
-            Assert.Equal(6, Subject.Convert(six));
+            Assert.Equal(6, Subject.Convert(six).FromJust());
         }
 
         [Fact]
@@ -62,7 +63,7 @@ namespace OCRTest.ConverterTest {
             List<string> seven = new List<string> { " _ ",
                                                     "  |",
                                                     "  |" };
-            Assert.Equal(7, Subject.Convert(seven));
+            Assert.Equal(7, Subject.Convert(seven).FromJust());
         }
 
         [Fact]
@@ -71,7 +72,7 @@ namespace OCRTest.ConverterTest {
                                                    "|_|",
                                                    "|_|"};
 
-            Assert.Equal(8, Subject.Convert(eight));
+            Assert.Equal(8, Subject.Convert(eight).FromJust());
         }
 
         [Fact]
@@ -80,7 +81,7 @@ namespace OCRTest.ConverterTest {
                                                       "|_|",
                                                       " _|"};
 
-            Assert.Equal(9, Subject.Convert(nine));
+            Assert.Equal(9, Subject.Convert(nine).FromJust());
         }
 
         [Fact]
@@ -89,7 +90,7 @@ namespace OCRTest.ConverterTest {
                                                    "| |",
                                                    "|_|" };
 
-            Assert.Equal(0, Subject.Convert(zero));
+            Assert.Equal(0, Subject.Convert(zero).FromJust());
         }
     }
 }

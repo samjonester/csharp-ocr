@@ -1,8 +1,9 @@
 namespace OCR.Convert
 {
     using System.Collections.Generic;
+    using FP;
     public interface IConvert
     {
-       int Convert(IEnumerable<string> number);
+       Maybe<int> Convert(IEnumerable<string> number);
     }
 }

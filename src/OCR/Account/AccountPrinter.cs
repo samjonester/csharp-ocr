@@ -1,20 +1,32 @@
 namespace OCR.Account
 {
-    using System.Linq;
-    using Convert;
+    using System.Collections.Generic;
+    using Extensions;
+    using FP;
+    using CheckSum;
+    using Print;
     public class AccountPrinter : IPrintAccount
     {
-        public string Print(AccountValue account) {
-            string numberAsString = string.Join("", account.Number.Select(n => n != NumberConverter.INVALID ? n.ToString() : "?"));
-            string illOrErr = "";
-            if (account.Number.Contains(NumberConverter.INVALID)) {
-                illOrErr = " ILL";
-            }
-            else if (!account.Valid)
-            {
-                illOrErr = " ERR";
-            }
-            return $"{numberAsString}{illOrErr}";
+        private ICheckSum CheckSummer;
+        private ITestLegibility LegibilityTester;
+        private IValidate Validator;
+
+        public AccountPrinter() : this(new LegibilityTester(), new Validator()) {}
+
+        public AccountPrinter(ITestLegibility legibilityTester, IValidate validator) {
+            this.LegibilityTester = legibilityTester;
+            this.Validator = validator;
         }
+
+        public string Print(IEnumerable<Maybe<int>> accountNumber) {
+            return accountNumber
+            .With(LegibilityTester.TestLegibility)
+            .Chain(Validator.Validate)
+            .Case(
+                error => error,
+                right => right.StrJoin()
+            );
+        }
+
     }
 }
